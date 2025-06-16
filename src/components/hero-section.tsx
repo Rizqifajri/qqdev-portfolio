@@ -9,8 +9,8 @@ export const HeroSection = () => {
 
       <Image src={emoji} alt="emoji" className="z-10 w-56 md:w-96 md:h-96" />
       <SplitText
-        text="Hi, I'm Kiki. A Digital Architect."
-        className="z-10 text-6xl md:text-8xl font-semibold text-center h-60"
+        text="Hi, I'm Qiqi. A Digital Architect."
+        className="z-10 text-2xl md:text-8xl font-semibold text-center h-60"
         delay={100}
         duration={0.6}
         ease="power3.out"

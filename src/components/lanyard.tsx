@@ -32,13 +32,18 @@ useTexture.preload(
 export default function Lanyard() {
 
   return (
-    <Canvas camera={{ position: [0, 0, 13], fov: 25 }}>
+    <Canvas
+      camera={{ position: [0, 0, 13], fov: 25 }}
+      gl={{ alpha: true }}
+      style={{ background: 'transparent' }}
+    >
       <ambientLight intensity={Math.PI} />
       <Physics debug={false} interpolate gravity={[0, -40, 0]} timeStep={1 / 60}>
         <Band />
       </Physics>
-      <Environment background blur={0.75}>
-        <color attach="background" args={['black']} />
+
+      <Environment blur={0.75}>
+ 
         <Lightformer
           intensity={2}
           color="black"
@@ -69,6 +74,7 @@ export default function Lanyard() {
         />
       </Environment>
     </Canvas>
+
   )
 }
 
@@ -214,7 +220,7 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
             }}
           >
             {/* Custom kartu lanyard dengan texture */}
-            <mesh geometry={nodes.card.geometry } >
+            <mesh geometry={nodes.card.geometry} >
               <meshPhysicalMaterial
                 map={cardTexture}
                 map-anisotropy={16}

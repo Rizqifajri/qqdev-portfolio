@@ -7,7 +7,6 @@ import ProjectsHeader from "./project-header"
 import { useProjectsAnimation } from "@/hooks/use-project-animation"
 import ProjectCard3D from "./project-card"
 
-
 export default function ProjectsSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)

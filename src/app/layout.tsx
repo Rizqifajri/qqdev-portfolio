@@ -5,6 +5,7 @@ import { Header } from "@/components/headers";
 import { Footer } from "@/components/footer";
 import { ReactNode } from "react";
 import { Providers } from "@/providers/theme-providers";
+import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Qiqi.Dev",
+  title: "Dev with Qiqi",
   description: "Frontend Developer",
 };
 
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
+          <SmoothCursor />
         </Providers>
       </body>
     </html>

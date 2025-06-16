@@ -1,12 +1,12 @@
-"use client"
+'use client'
 
 import { useRef, useEffect } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
 import emoji from "@/assets/emoji/emoji-about.png"
 
-gsap.registerPlugin(ScrollTrigger)
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { splitTextAnimation } from "@/utils/animations/split-text-animation"
+import { fadeIn, slideFromLeft, slideFromRight } from "@/utils/animations/gsap-animation"
 
 export const AboutSection = () => {
   const titleRef = useRef<HTMLHeadingElement>(null)
@@ -16,109 +16,21 @@ export const AboutSection = () => {
   const rightSectionRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const title = titleRef.current
-    const subtitle = subtitleRef.current
-    const emoji = emojiRef.current
-    const leftSection = leftSectionRef.current
-    const rightSection = rightSectionRef.current
+    splitTextAnimation(titleRef.current)
+    splitTextAnimation(subtitleRef.current)
 
-    if (title) {
-      const text = title.textContent || ""
-      title.innerHTML = text
-        .split("")
-        .map((char) =>
-          char === " " ? `<span>&nbsp;</span>` : `<span>${char}</span>`
-        )
-        .join("")
-
-
-      gsap.from(title.querySelectorAll("span"), {
-        scrollTrigger: {
-          trigger: title,
-          start: "top 85%",
-          end: "top 35%",
-          scrub: true,
-        },
-        opacity: 0,
-        y: 50,
-        duration: 0.5,
-        stagger: 0.05,
-      })
-    }
-
-    if (subtitle) {
-      const text = subtitle.textContent || ""
-      subtitle.innerHTML = text
-        .split("")
-        .map((char) =>
-          char === " " ? `<span>&nbsp;</span>` : `<span>${char}</span>`
-        )
-        .join("")
-
-  
-      gsap.from(subtitle.querySelectorAll("span"), {
-        scrollTrigger: {
-          trigger: subtitle,
-          start: "top 85%",
-          end: "top 35%",
-          scrub: true,
-        },
-        opacity: 0,
-        y: 50,
-        duration: 0.5,
-        stagger: 0.05,
-      })
-    }
-
-    if (emoji) {
-      gsap.from(emoji, {
-        scrollTrigger: {
-          trigger: emoji,
-          start: "top 80%",
-          end: "top 50%",
-          scrub: true,
-        },
-        y: -100,
-        opacity: 0,
-        duration: 0.6,
-      })
-    }
-
-    if (leftSection) {
-      gsap.from(leftSection, {
-        scrollTrigger: {
-          trigger: leftSection,
-          start: "top 80%",
-          end: "top 50%",
-          scrub: true,
-        },
-        x: -100,
-        opacity: 0,
-        duration: 0.5,
-      })
-    }
-
-    if (rightSection) {
-      gsap.from(rightSection, {
-        scrollTrigger: {
-          trigger: rightSection,
-          start: "top 80%",
-          end: "top 50%",
-          scrub: true,
-        },
-        x: 100,
-        opacity: 0,
-        duration: 1.5,
-      })
-    }
+    fadeIn(emojiRef.current, { y: -100, duration: 0.6 })
+    slideFromLeft(leftSectionRef.current, { duration: 0.5 })
+    slideFromRight(rightSectionRef.current, { duration: 1.5 })
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
     }
   }, [])
 
   return (
-    <section id="about" className=" flex flex-col h-screen items-center justify-center space-y-10">
+    <section id="about" className="relative flex flex-col h-screen items-center justify-center space-y-10">
+      <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.05)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none" />
       <h1
         ref={titleRef}
         className="animated-text text-2xl md:text-7xl font-semibold text-center"
@@ -126,10 +38,10 @@ export const AboutSection = () => {
         I'm a Frontend Developer
       </h1>
 
-
       <div ref={emojiRef} className="animated-emoji">
         <Image src={emoji} alt="emoji" className="w-40 md:w-60 mx-auto" />
       </div>
+
       <p
         ref={subtitleRef}
         className="text-center italic font-light w-full px-4 text-sm sm:text-base md:text-xl lg:text-2xl mx-auto"

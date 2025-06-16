@@ -11,6 +11,7 @@ import ProjectsSection3D from "@/components/project-section";
 import TechStackSection from "@/components/tech-stack-section";
 import ContactSection from "@/components/contact-section";
 
+
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 
 const App = () => {

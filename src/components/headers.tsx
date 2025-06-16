@@ -1,6 +1,8 @@
 "use client"
+
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "./theme-toggle"
@@ -8,6 +10,7 @@ import { ThemeToggle } from "./theme-toggle"
 export const Header = () => {
   const [visible, setVisible] = useState(true)
   const lastScrollTop = useRef(0)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,15 +30,26 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const handleClick = (e: React.MouseEvent) => {
+    if (pathname === "/") {
+      e.preventDefault()
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+  }
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 dark:bg-black bg-white  ${visible ? "translate-y-0" : "-translate-y-full"
+      className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 dark:bg-black bg-white ${visible ? "translate-y-0" : "-translate-y-full"
         }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
-          <Link href="/" className="text-xl font-bold dark:text-white text-black">
-            Qiqi.Dev
+          <Link
+            href="/"
+            onClick={handleClick}
+            className="text-xl font-bold dark:text-white text-black"
+          >
+            QIQIDEV
           </Link>
           <nav>
             <ul className="flex items-center space-x-6">
