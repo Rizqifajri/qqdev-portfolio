@@ -29,11 +29,16 @@ export const AboutSection = () => {
   }, [])
 
   return (
-    <section id="about" className="relative flex flex-col h-screen items-center justify-center space-y-10">
-      <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.05)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none" />
+    <section
+      id="about"
+      className="relative flex flex-col min-h-screen items-center justify-center space-y-10 pt-40" // Tambahkan pt-40
+    >
+      {/* Background Grid */}
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.05)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none" />
+
       <h1
         ref={titleRef}
-        className="animated-text text-2xl md:text-7xl font-semibold text-center"
+        className="animated-text text-2xl md:text-5xl lg:text-7xl font-semibold text-center"
       >
         I'm a Frontend Developer
       </h1>
@@ -54,11 +59,11 @@ export const AboutSection = () => {
           ref={leftSectionRef}
           className="flex flex-col bg-black text-white p-3"
         >
-          <h1 className="text-5xl md:text-9xl font-semibold text-left">
+          <h1 className="text-5xl md:text-7xl xl:text-9xl font-semibold text-left">
             Art & <br />
             Aesthetics.
           </h1>
-          <p className="text-left font-light mt-4 md:text-7xl">
+          <p className="text-left font-light mt-4 text-3xl md:text-4xl xl:text-5xl">
             "Great digital experiences are born from beautiful, intuitive design."
           </p>
         </div>
@@ -67,15 +72,16 @@ export const AboutSection = () => {
           ref={rightSectionRef}
           className="flex flex-col bg-white text-black p-3"
         >
-          <h1 className="text-5xl md:text-9xl font-semibold text-right">
+          <h1 className="text-5xl md:text-7xl xl:text-9xl font-semibold text-right">
             Logic & <br />
             Structure.
           </h1>
-          <p className="text-right font-light mt-4 md:text-7xl">
+          <p className="text-right font-light mt-4 text-3xl md:text-4xl xl:text-5xl">
             "And brought to life with clean, efficient, and scalable code."
           </p>
         </div>
       </div>
     </section>
+
   )
 }
